@@ -35,12 +35,12 @@ def predict_datapoint():
             )
         
         df = data.get_data_as_dataframe()
-        print(df)
-        print("Before Prediction")
+        #print(df)
+        #print("Before Prediction")
 
         pred_pipeline = PredictPipeline()
         results = pred_pipeline.predict(df)
-        print("after Prediction")
+        #print("after Prediction")
         return render_template('home.html',results=round(results[0],2))
     
 
