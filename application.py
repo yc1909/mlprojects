@@ -19,7 +19,7 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/predictdata',methods = ['GET','POST'])
+@app.route('/predict_datapoint',methods = ['GET','POST'])
 def predict_datapoint():
     if request.method=='GET':
         return render_template('home.html')
