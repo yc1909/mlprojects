@@ -22,8 +22,6 @@ def handle_error(error):
 
 @app.route('/')
 def index():
-    # Intentional error to force logging
-    1 / 0
     return render_template('index.html')
 
 @app.route('/home')
