@@ -11,9 +11,8 @@ from src.pipeline.predict_pipeline import CustomData, PredictPipeline
 application = Flask(__name__)
 app = application
 
-
-logging.basicConfig(level=logging.ERROR)
-
+# Set up logging to print to console
+logging.basicConfig(level=logging.DEBUG)
 
 @app.errorhandler(Exception)
 def handle_error(error):
@@ -23,10 +22,14 @@ def handle_error(error):
 
 @app.route('/')
 def index():
+    # Intentional error to force logging
+    1 / 0
     return render_template('index.html')
 
 @app.route('/home')
 def home():
+    # Intentional error to force logging
+    nonexistent_variable
     return render_template('home.html')
 
 @app.route('/predict_datapoint', methods=['GET', 'POST'])
@@ -35,6 +38,9 @@ def predict_datapoint():
         return render_template('home.html')
     else:
         try:
+            # Intentional error to force logging
+            raise ValueError("Intentional error for testing")
+
             data = CustomData(
                 gender=request.form.get('gender'),
                 race_ethnicity=request.form.get('ethnicity'),
