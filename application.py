@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template
 import logging
+from logging.handlers import RotatingFileHandler
 
 
 import numpy as np
@@ -11,8 +12,13 @@ from src.pipeline.predict_pipeline import CustomData, PredictPipeline
 application = Flask(__name__)
 app = application
 
-# Set up logging to print to console
-logging.basicConfig(level=logging.DEBUG)
+
+
+formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+file_handler = RotatingFileHandler("application.log", maxBytes=10240, backupCount=10)
+file_handler.setFormatter(formatter)
+app.logger.addHandler(file_handler)
+app.logger.setLevel(logging.ERROR)
 
 @app.errorhandler(Exception)
 def handle_error(error):
@@ -34,9 +40,6 @@ def predict_datapoint():
         return render_template('home.html')
     else:
         try:
-            # Intentional error to force logging
-            raise ValueError("Intentional error for testing")
-
             data = CustomData(
                 gender=request.form.get('gender'),
                 race_ethnicity=request.form.get('ethnicity'),
