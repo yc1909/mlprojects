@@ -12,7 +12,7 @@ application = Flask(__name__)
 app = application
 
 
-logging.basicConfig(filename='application.log', level=logging.ERROR)
+logging.basicConfig(level=logging.ERROR)
 
 
 @app.errorhandler(Exception)
