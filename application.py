@@ -26,8 +26,6 @@ def index():
 
 @app.route('/home')
 def home():
-    # Intentional error to force logging
-    nonexistent_variable
     return render_template('home.html')
 
 @app.route('/predict_datapoint', methods=['GET', 'POST'])
